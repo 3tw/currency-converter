@@ -1,1 +1,23 @@
-<p>select works!</p>
+<div class="relative">
+  <input
+    [value]="value"
+    [disabled]="disabled"
+    type="text"
+    class="cursor-pointer w-full rounded-full border-2 border-gray-300 py-2 px-4 font-semibold text-black"
+    (click)="toggle()"
+  />
+  <div
+    [class.hidden]="!listOpen"
+    class="absolute top-10 max-h-60 h-60 w-32 font-semibold bg-white border border-gray-100 shadow-transparent overflow-y-scroll"
+  >
+    <ul>
+      <li
+        *ngFor="let option of options; index as i"
+        class="px-2 py-1 border-b border-gray-100 hover:bg-blue-600 hover:text-white"
+        (click)="writeValue(option)"
+      >
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+</div>
