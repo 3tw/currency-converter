@@ -28,14 +28,14 @@
 
   <div
     [class.hidden]="!listOpen"
-    class="absolute z-10 top-10 max-h-60 w-32 font-semibold bg-white border border-gray-100 shadow-transparent overflow-y-scroll"
+    class="absolute z-10 top-10 max-h-60 w-32 font-semibold bg-white border rounded-sm border-gray-300 shadow-transparent overflow-y-scroll"
   >
     <ul>
       <ng-container *ngFor="let option of displayedOptions">
         <li
           *ngIf="option !== value"
           tabindex="0"
-          class="list-item px-2 py-1 border-b border-gray-100 cursor-pointer focus:rounded-none focus:bg-blue focus:text-white focus:outline-none hover:bg-blue hover:text-white"
+          class="list-item px-2 py-1 border-b border-gray-100 text-black cursor-pointer focus:rounded-none focus:bg-blue focus:border-blue focus:text-white focus:outline-none hover:bg-blue hover:border-blue hover:text-white"
           (click)="writeValue(option); close()"
           (keyup)="search($event)"
           (keydown.enter)="writeValue(option); close()"
