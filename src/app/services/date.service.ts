@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { format, addYears } from 'date-fns'
+import { addYears, format, parse } from 'date-fns'
 
 @Injectable({
   providedIn: 'root',
@@ -17,5 +17,8 @@ export class DateService {
   }
   addYears(years: number) {
     return format(addYears(this.todayDate, years), this.stringFormat)
+  }
+  parse(dateString: string) {
+    return parse(dateString, this.stringFormat, new Date())
   }
 }

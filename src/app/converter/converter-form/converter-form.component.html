@@ -4,7 +4,7 @@
     <input
       formControlName="amount"
       type="number"
-      class="rounded-full border-2 border-gray-300 py-2 px-4 font-semibold text-black"
+      class="rounded-full border-2 border-gray-300 py-2 px-4 font-semibold text-black focus:outline-magenta-400 focus:text-magenta-400"
     />
   </label>
 
@@ -18,7 +18,22 @@
       ></app-select>
     </label>
 
-    <button (click)="switchCurrency()" class="switch-button"></button>
+    <button
+      (click)="switchCurrency()"
+      class="switch-button focus:outline-magenta-400"
+    >
+      <svg
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        class="p-2"
+      >
+        <path
+          fill="#fff"
+          d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"
+        ></path>
+      </svg>
+    </button>
 
     <label class="stack gap-2">
       <span class="text-sm">To</span>

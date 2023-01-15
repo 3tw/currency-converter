@@ -1,7 +1,6 @@
 import { Component, Input, SimpleChanges } from '@angular/core'
 import { Rates } from '@app/services/exchange-rate'
 import { DateService } from '@app/services/date.service'
-import { ConverterFormData } from '../converter-form/converter-form'
 
 @Component({
   selector: 'app-converter-display',

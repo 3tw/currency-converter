@@ -42,7 +42,6 @@ export class SelectComponent implements ControlValueAccessor {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['options'] && this.options.length) {
-      console.log('NEW')
       this.displayedOptions = this.excludeSelectedOptions(this.options)
       this.options.forEach((key) => this.ratesTrie.insert(key))
       return
@@ -57,7 +56,7 @@ export class SelectComponent implements ControlValueAccessor {
   }
   open() {
     this.listOpen = true
-    this.triggerElement.nativeElement.focus()
+    // this.triggerElement.nativeElement.focus()
   }
   close() {
     this.onChange(this.value)

@@ -1,0 +1,9 @@
+<ng-container *ngIf="chartOptions">
+  <highcharts-chart
+    [Highcharts]="chart"
+    [options]="chartOptions"
+    [(update)]="updateFlag"
+    [oneToOne]="true"
+    style="width: 100%; height: 200px; display: block"
+  ></highcharts-chart>
+</ng-container>

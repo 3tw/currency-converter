@@ -51,7 +51,6 @@ export class ConverterComponent implements OnInit {
     response?.subscribe((rates) => {
       if (!rates) return
       this.exchangeRates = rates
-      console.log(this.exchangeRates)
     })
   }
 }

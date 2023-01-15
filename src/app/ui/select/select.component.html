@@ -1,15 +1,30 @@
 <div class="relative w-full">
-  <span
+  <div
     #trigger
     tabindex="0"
     type="text"
-    class="block w-full h-11 py-2 px-4 cursor-pointer rounded-full border-2 border-gray-300 font-semibold text-black"
+    class="flex items-center justify-between w-full h-11 py-2 px-4 cursor-pointer rounded-full border-2 border-gray-300 font-semibold text-black focus:outline-none focus:border-magenta-400 focus:text-magenta-400"
     (click)="toggle()"
     (keyup)="search($event)"
     (keydown.enter)="open()"
     (keydown.escape)="close()"
-    >{{ value }}</span
   >
+    <span>{{ value }}</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="2.5"
+      class="w-5 h-5 stroke-gray-300 transform"
+      [class.rotate-180]="listOpen"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+      />
+    </svg>
+  </div>
 
   <div
     [class.hidden]="!listOpen"
@@ -20,7 +35,7 @@
         <li
           *ngIf="option !== value"
           tabindex="0"
-          class="list-item px-2 py-1 border-b border-gray-100 cursor-pointer focus:rounded-none focus:bg-blue-600 focus:text-white focus:outline-none hover:bg-blue-600 hover:text-white"
+          class="list-item px-2 py-1 border-b border-gray-100 cursor-pointer focus:rounded-none focus:bg-blue focus:text-white focus:outline-none hover:bg-blue hover:text-white"
           (click)="writeValue(option); close()"
           (keyup)="search($event)"
           (keydown.enter)="writeValue(option); close()"

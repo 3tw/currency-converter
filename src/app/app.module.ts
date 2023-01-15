@@ -7,8 +7,6 @@ import { ChartModule } from './chart/chart.module'
 import { ConverterModule } from './converter/converter.module'
 import { UiModule } from './ui/ui.module'
 
-// import { SelectComponent } from './ui/select/select.component';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [

@@ -1,15 +1,23 @@
-<div class="rounded-md drop-shadow-lg bg-white text-gray-500 w-xs max-w-xs">
-  <div class="stack gap-6 p-8">
-    <app-converter-form
-      [currencies]="currencies"
-      (emitData)="updateForm($event)"
-    >
-    </app-converter-form>
-    <app-converter-display
-      [exchangeRates]="exchangeRates"
-      [amount]="formData.amount"
-      [baseCurrency]="formData.baseCurrency"
-      [counterCurrency]="formData.counterCurrency"
-    ></app-converter-display>
+<div class="rounded-md drop-shadow-lg bg-white w-sm max-w-sm">
+  <div class="stack gap-6 py-6">
+    <div class="stack gap-6 px-6">
+      <app-converter-form
+        [currencies]="currencies"
+        (emitData)="updateForm($event)"
+      >
+      </app-converter-form>
+      <app-converter-display
+        [exchangeRates]="exchangeRates"
+        [amount]="formData.amount"
+        [baseCurrency]="formData.baseCurrency"
+        [counterCurrency]="formData.counterCurrency"
+      ></app-converter-display>
+    </div>
+    <div class="px-2">
+      <app-converter-chart
+        [exchangeRates]="exchangeRates"
+        [rateKey]="formData.counterCurrency"
+      ></app-converter-chart>
+    </div>
   </div>
 </div>
