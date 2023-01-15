@@ -1,30 +1,31 @@
-<form [formGroup]="converter" class="stack gap-6 flex">
+<form [formGroup]="converter" class="stack gap-4 flex">
   <label class="cursor-pointer stack gap-2">
     <span class="text-sm">Amount</span>
     <input
       formControlName="amount"
       type="number"
       class="rounded-full border-2 border-gray-300 py-2 px-4 font-semibold text-black"
-      (keyup)="getSuggestions()"
     />
   </label>
 
-  <div class="flex justify-between items-end max-w-full gap-4">
-    <label class="cursor-pointer stack gap-2">
+  <div class="grid justify-between items-end max-w-full gap-4">
+    <label class="stack gap-2">
       <span class="text-sm">From</span>
       <app-select
         formControlName="baseCurrency"
         [options]="currencies"
+        [excludedOption]="converter.controls.counterCurrency.value ?? ''"
       ></app-select>
     </label>
 
-    <button (click)="test()" class="switch-button"></button>
+    <button (click)="switchCurrency()" class="switch-button"></button>
 
-    <label class="cursor-pointer stack gap-2">
+    <label class="stack gap-2">
       <span class="text-sm">To</span>
       <app-select
         formControlName="counterCurrency"
         [options]="currencies"
+        [excludedOption]="converter.controls.baseCurrency.value ?? ''"
       ></app-select>
     </label>
   </div>

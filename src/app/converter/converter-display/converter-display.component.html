@@ -1,1 +1,30 @@
-<p>converter-display works!</p>
+<div class="stack gap-8">
+  <div class="flex items-center justify-between gap-4 text-gray-300 text-sm">
+    <div class="flex-grow border border-gray-300"></div>
+    <p>
+      1 <span class="underline">{{ baseCurrency }}</span> =
+      {{ exchangeRateToday }} {{ counterCurrency }}
+    </p>
+    <div class="flex-grow border border-gray-300"></div>
+  </div>
+
+  <div class="stack items-center gap-3">
+    <p class="break-all text-2xl leading-none">
+      {{ amount }}
+      <span class="text-md">{{ baseCurrency }}</span>
+    </p>
+    <span class="text-2xl leading-none"> = </span>
+    <p class="break-all text-3xl leading-none">
+      {{ counterCurrencyAmount }}
+      <span class="text-md">
+        {{ counterCurrency }}
+      </span>
+    </p>
+  </div>
+
+  <div class="flex items-center justify-between gap-4 text-gray-300 text-sm">
+    <div class="flex-grow border border-gray-300"></div>
+    <p>{{ today }}</p>
+    <div class="flex-grow border border-gray-300"></div>
+  </div>
+</div>

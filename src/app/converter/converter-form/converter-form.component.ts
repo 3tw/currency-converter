@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { FormControl, FormGroup } from '@angular/forms'
-import { AutocompleteService } from '@app/services/autocomplete.service'
+import { debounceTime } from 'rxjs/operators'
+import { ConverterFormData } from './converter-form'
 
 @Component({
   selector: 'app-converter-form',
@@ -8,27 +9,40 @@ import { AutocompleteService } from '@app/services/autocomplete.service'
   styleUrls: ['./converter-form.component.scss'],
 })
 export class ConverterFormComponent {
-  @Input() ratesTrie: AutocompleteService | undefined = undefined
   @Input() currencies: string[] = []
-  private suggestions: Set<string> = new Set()
+  @Output() emitData = new EventEmitter<ConverterFormData>()
+
   converter = new FormGroup({
     amount: new FormControl(null),
-    baseCurrency: new FormControl(''),
-    counterCurrency: new FormControl(''),
+    baseCurrency: new FormControl('EUR'),
+    counterCurrency: new FormControl('USD'),
   })
 
   constructor() {}
 
-  test() {
-    console.log(this.converter.controls.baseCurrency.value)
-    console.log(this.converter.controls.counterCurrency.value)
+  ngOnInit(): void {
+    this.emitFormData()
+    this.converter.valueChanges
+      .pipe(debounceTime(100))
+      .subscribe((value: any) => {
+        this.emitFormData()
+      })
   }
 
-  getSuggestions() {
-    if (!this.ratesTrie) return
-    this.suggestions = this.ratesTrie.getSuggestions(
-      // this.converter.controls.amount?.vaue
-      'EU ',
+  emitFormData() {
+    const payload = {
+      amount: this.converter.controls.amount.value ?? 0,
+      baseCurrency: this.converter.controls.baseCurrency.value ?? '',
+      counterCurrency: this.converter.controls.counterCurrency.value ?? '',
+    }
+    this.emitData.emit(payload)
+  }
+
+  switchCurrency() {
+    const temp = this.converter.controls.baseCurrency.value
+    this.converter.controls.baseCurrency.setValue(
+      this.converter.controls.counterCurrency.value,
     )
+    this.converter.controls.counterCurrency.setValue(temp)
   }
 }

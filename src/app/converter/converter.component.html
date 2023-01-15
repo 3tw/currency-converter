@@ -1,7 +1,15 @@
-<div class="rounded-md drop-shadow-lg bg-white text-gray-500 max-w-xs">
-  <div class="stack gap-4 p-8">
-    <app-converter-form [ratesTrie]="ratesTrie" [currencies]="currencies">
+<div class="rounded-md drop-shadow-lg bg-white text-gray-500 w-xs max-w-xs">
+  <div class="stack gap-6 p-8">
+    <app-converter-form
+      [currencies]="currencies"
+      (emitData)="updateForm($event)"
+    >
     </app-converter-form>
-    <app-converter-display></app-converter-display>
+    <app-converter-display
+      [exchangeRates]="exchangeRates"
+      [amount]="formData.amount"
+      [baseCurrency]="formData.baseCurrency"
+      [counterCurrency]="formData.counterCurrency"
+    ></app-converter-display>
   </div>
 </div>

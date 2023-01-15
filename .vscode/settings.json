@@ -6,6 +6,7 @@
   },
   "cSpell.words": [
     "tailwindcss",
+    "timeseries"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "[javascript]": {
