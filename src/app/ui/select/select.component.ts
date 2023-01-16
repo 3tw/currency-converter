@@ -3,11 +3,14 @@ import {
   Input,
   forwardRef,
   ViewChild,
+  ViewChildren,
   ElementRef,
   SimpleChanges,
+  QueryList,
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { AutocompleteService } from '@app/services/autocomplete.service'
+import { SelectOptionComponent } from '../select-option/select-option.component'
 
 @Component({
   selector: 'app-select',
@@ -23,11 +26,15 @@ import { AutocompleteService } from '@app/services/autocomplete.service'
 })
 export class SelectComponent implements ControlValueAccessor {
   @ViewChild('trigger') triggerElement!: ElementRef<HTMLElement>
+  @ViewChildren('selectOption')
+  optionElements!: QueryList<SelectOptionComponent>
   @Input() excludedOption = ''
   @Input() options: string[] = []
 
   value = ''
   query = ''
+  userIsTyping = false
+  userTypingTimer: ReturnType<typeof setTimeout> | null = null
   listOpen = false
   defaultOptions: string[] = []
   displayedOptions: string[] = []
@@ -42,69 +49,83 @@ export class SelectComponent implements ControlValueAccessor {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['options'] && this.options.length) {
-      this.displayedOptions = this.excludeSelectedOptions(this.options)
       this.options.forEach((key) => this.ratesTrie.insert(key))
-      return
     }
     this.displayedOptions = this.excludeSelectedOptions(this.options)
   }
 
   // Ui
+
   toggle() {
     if (this.listOpen) this.close()
     else this.open()
   }
   open() {
     this.listOpen = true
-    // this.triggerElement.nativeElement.focus()
   }
   close() {
     this.onChange(this.value)
     this.listOpen = false
     this.triggerElement.nativeElement.focus()
-    this.displayedOptions = this.options
+    this.displayedOptions = this.excludeSelectedOptions(this.options)
     this.query = ''
   }
 
-  // Auto complete
+  // Autocomplete
   search(event: any) {
     const key = event.key.toLowerCase()
     if (!key) return
-    if (this.query.length >= 3) {
+
+    // Set timer to reset query if user is stops typing
+    if (this.userIsTyping && this.userTypingTimer) {
+      clearTimeout(this.userTypingTimer)
+    }
+    this.userIsTyping = true
+    this.userTypingTimer = setTimeout(() => {
+      this.userIsTyping = false
       this.query = ''
-    } else if (key === 'backspace') {
-      this.query = this.query.slice(0, -1)
+    }, 800)
+
+    // Adjust query
+    if (key === 'backspace' || this.query.length >= 3) {
+      this.query = ''
     } else if (key.length === 1 && /[a-z]/.test(key)) {
       this.query += key
     }
 
+    // Get suggestions and focus first element on the list
     const suggestions = this.ratesTrie
       ? this.excludeSelectedOptions(
           Array.from(this.ratesTrie.getSuggestions(this.query)),
         )
       : []
-
+    let selected = ''
     if (
       !suggestions.length ||
-      (suggestions.length === 1 &&
-        [this.value, this.excludedOption].includes(suggestions[0]))
+      (suggestions.length === 1 && this.excludedOption === suggestions[0])
     ) {
-      this.displayedOptions = this.excludeSelectedOptions(this.options)
       this.query = ''
+      selected = suggestions[0]
     } else {
-      this.displayedOptions = suggestions
+      selected = suggestions[0]
     }
+
+    const suggestedOptionElement = this.optionElements.find(
+      (el) => el && el.value === selected,
+    )
+    if (!suggestedOptionElement) return
+    suggestedOptionElement.focus()
   }
   excludeSelectedOptions(array: string[]) {
-    return array.filter(
-      (value) => value !== this.value && value !== this.excludedOption,
-    )
+    return array.filter((value) => value !== this.excludedOption)
   }
 
   // Control Value Accessor Interface
-  writeValue(value: string): void {
+  writeValue(value: string, close = false): void {
+    if (this.value === value) return
     this.value = value
     this.onChange(this.value)
+    if (close) this.close()
   }
   registerOnChange(fn: any): void {
     this.onChange = fn

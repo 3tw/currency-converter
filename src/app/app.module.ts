@@ -3,19 +3,12 @@ import { BrowserModule } from '@angular/platform-browser'
 import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component'
-import { ChartModule } from './chart/chart.module'
 import { ConverterModule } from './converter/converter.module'
 import { UiModule } from './ui/ui.module'
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    ChartModule,
-    ConverterModule,
-    UiModule,
-  ],
+  imports: [BrowserModule, HttpClientModule, ConverterModule, UiModule],
   providers: [],
   bootstrap: [AppComponent],
 })

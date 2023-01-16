@@ -9,7 +9,7 @@ module.exports = {
     colors: {
       magenta: {
         300: '#a00083',
-        400: '#bf0051',
+        400: '#8e009e',
       },
       gray: {
         100: '#e2dee1',
@@ -22,8 +22,8 @@ module.exports = {
     fontSize: {
       base: '1rem',
       sm: '0.85rem',
-      md: '1.25rem',
-      lg: '1.5rem',
+      md: '1.3rem',
+      lg: '1.75rem',
     },
   },
   plugins: [],

@@ -3,5 +3,19 @@
 }
 .switch-button {
   @apply h-11 w-11 bg-magenta-400 rounded-full;
+  background: linear-gradient(
+    43deg,
+    rgba(157, 0, 138, 1) 0%,
+    rgba(181, 9, 98, 1) 100%
+  );
   flex: 0 0 2.75rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
 }

@@ -5,6 +5,11 @@
 @layer base {
   html {
     @apply bg-magenta-300 text-gray-300 text-base font-normal;
+    background: linear-gradient(
+      43deg,
+      rgba(181, 9, 98, 1) 0%,
+      rgba(157, 0, 138, 1) 100%
+    );
   }
 }
 

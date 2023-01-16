@@ -62,8 +62,8 @@ export class ConverterChartComponent {
         showInLegend: false,
         type: 'areaspline',
         lineColor: '#bf0051',
-        color: '#c47ccb',
-        fillOpacity: 0.6,
+        color: '#bf0051',
+        fillOpacity: 0.4,
         data: [],
       },
     ],
@@ -97,10 +97,6 @@ export class ConverterChartComponent {
         this.chartIsReady = true
         return
       }
-      // @ts-ignore
-      // this.chartOptions.series[0].data = formattedData
-      // this.chart.chart.series[0].setData(formattedData)
-      console.log(this.chart)
     }
   }
 }
