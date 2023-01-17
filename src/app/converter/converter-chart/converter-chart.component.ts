@@ -48,7 +48,7 @@ export class ConverterChartComponent {
         },
         min: minValue,
         max: maxValue,
-        tickAmount: 9,
+        // tickAmount: 9,
       },
       tooltip: {
         borderColor: 'black',
@@ -65,7 +65,6 @@ export class ConverterChartComponent {
           color: '#bf0051',
           fillOpacity: 0.4,
           data: data ?? [],
-          animation: false,
         },
       ],
     }
@@ -100,14 +99,14 @@ export class ConverterChartComponent {
     const entries = Object.entries(this.exchangeRates)
     let minValue = entries[0][1][this.rateKey]
     let maxValue = entries[0][1][this.rateKey]
-    const formattedData: { x: number; y: number }[] = entries.map(
+    const formattedData: [number, number][] = entries.map(
       ([dateString, value]) => {
         if (value[this.rateKey] < minValue) minValue = value[this.rateKey]
         if (value[this.rateKey] > maxValue) maxValue = value[this.rateKey]
-        return {
-          x: this.dateService.parse(dateString).getTime(),
-          y: value[this.rateKey],
-        }
+        return [
+          this.dateService.parse(dateString).getTime(),
+          value[this.rateKey],
+        ]
       },
     )
     return { minValue, maxValue, data: formattedData }
