@@ -1,7 +1,7 @@
 # CurrencyConverter
 
 ## Observations
-I noticed the chart in .gif file always displayed only a week of data. The instructions, however, demanded a year of data. I have opted for the second option, with zoom capabilities. This came with a shortcoming I wasn't able to resolve. When you zoom-in to see the points of the chart, i.e. data for each dat, you notice that the points are not animated, whereas the line is. I am not sure if this is a shortcoming of a library or error on my part.
+I noticed the chart in .gif file displayed only a week of data. The instructions, however, demanded a year of data. I have opted for the second option, with zoom capabilities. This came with a shortcoming I wasn't able to resolve. When you zoom-in to see individual points on the chart, i.e. data for each day, you notice that the points are not animated, whereas the line is. I am not sure if this is a shortcoming of a library or error on my part.
 
 ## Notes
 
