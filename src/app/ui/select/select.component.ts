@@ -55,7 +55,6 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   // Ui
-
   toggle() {
     if (this.listOpen) this.close()
     else this.open()
@@ -63,12 +62,18 @@ export class SelectComponent implements ControlValueAccessor {
   open() {
     this.listOpen = true
   }
-  close() {
+  close(reFocus = false) {
     this.onChange(this.value)
     this.listOpen = false
-    this.triggerElement.nativeElement.focus()
     this.displayedOptions = this.excludeSelectedOptions(this.options)
     this.query = ''
+    if (reFocus) {
+      this.triggerElement.nativeElement.focus()
+    }
+  }
+  handleOutsideClick() {
+    if (!this.listOpen) return
+    this.close()
   }
 
   // Autocomplete
@@ -84,7 +89,7 @@ export class SelectComponent implements ControlValueAccessor {
     this.userTypingTimer = setTimeout(() => {
       this.userIsTyping = false
       this.query = ''
-    }, 800)
+    }, 700)
 
     // Adjust query
     if (key === 'backspace' || this.query.length >= 3) {
@@ -123,9 +128,9 @@ export class SelectComponent implements ControlValueAccessor {
   // Control Value Accessor Interface
   writeValue(value: string, close = false): void {
     if (this.value === value) return
+    if (close) this.close(true)
     this.value = value
     this.onChange(this.value)
-    if (close) this.close()
   }
   registerOnChange(fn: any): void {
     this.onChange = fn

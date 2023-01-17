@@ -9,7 +9,6 @@ import { UiModule } from './ui/ui.module'
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, HttpClientModule, ConverterModule, UiModule],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

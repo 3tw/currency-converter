@@ -1,4 +1,4 @@
-<div class="relative w-full">
+<div class="relative w-full" (clickOutside)="handleOutsideClick()">
   <div
     #trigger
     tabindex="0"
@@ -14,8 +14,8 @@
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      stroke-width="2.5"
-      class="w-5 h-5 stroke-gray-300 transform"
+      stroke-width="3"
+      class="w-6 h-6 stroke-gray-300 transform"
       [class.rotate-180]="listOpen"
     >
       <path
@@ -34,13 +34,13 @@
     <ul>
       <ng-container *ngFor="let option of displayedOptions">
         <app-select-option
+          #selectOption
           [selected]="option === value"
           [value]="option"
           (keyup)="search($event)"
           (click)="writeValue(option, true)"
           (keydown.enter)="writeValue(option, true)"
-          (keydown.escape)="close()"
-          #selectOption
+          (keydown.escape)="close(true)"
         ></app-select-option>
       </ng-container>
     </ul>

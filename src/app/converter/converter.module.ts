@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { ConverterChartComponent } from './converter-chart/converter-chart.component'
+import { ConverterComponent } from './converter.component'
+import { ConverterDisplayComponent } from './converter-display/converter-display.component'
+import { ConverterFormComponent } from './converter-form/converter-form.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HighchartsChartModule } from 'highcharts-angular'
-import { ConverterFormComponent } from './converter-form/converter-form.component'
-import { ConverterDisplayComponent } from './converter-display/converter-display.component'
-import { ConverterComponent } from './converter.component'
+import { NgModule } from '@angular/core'
 import { UiModule } from '@app/ui/ui.module'
-import { ConverterChartComponent } from './converter-chart/converter-chart.component'
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { ConverterChartComponent } from './converter-chart/converter-chart.compo
     ConverterComponent,
     ConverterFormComponent,
     ConverterDisplayComponent,
+    ConverterChartComponent,
   ],
 })
 export class ConverterModule {}
