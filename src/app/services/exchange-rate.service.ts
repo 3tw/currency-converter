@@ -19,7 +19,7 @@ export class ExchangeRateService {
       map((data) => Object.keys(data?.rates)),
       retry(2),
       catchError((err, caught) => {
-        console.log(err)
+        console.log('Error fetching exchange rates: ', err)
         return caught
       }),
       share(),
