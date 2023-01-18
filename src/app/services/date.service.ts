@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
-import { addYears, format, parse } from 'date-fns'
+import { addYears, parse } from 'date-fns'
+import { formatInTimeZone, zonedTimeToUtc } from 'date-fns-tz'
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +14,19 @@ export class DateService {
   }
 
   today() {
-    return format(this.todayDate, this.stringFormat)
+    return formatInTimeZone(this.todayDate, 'UTC', this.stringFormat)
   }
   addYears(years: number) {
-    return format(addYears(this.todayDate, years), this.stringFormat)
+    return formatInTimeZone(
+      addYears(this.todayDate, years),
+      'UTC',
+      this.stringFormat,
+    )
   }
   parse(dateString: string) {
-    return parse(dateString, this.stringFormat, new Date())
+    return zonedTimeToUtc(
+      parse(dateString, this.stringFormat, new Date()),
+      'UTC',
+    )
   }
 }

@@ -36,8 +36,8 @@ export class ConverterChartComponent {
           format: '{value:%e %b}',
         },
         tickLength: 30,
-        tickPixelInterval: 40,
-        minTickInterval: 30,
+        // tickPixelInterval: 35,
+        minTickInterval: 35,
         gridLineWidth: 1,
         minRange: 3600 * 1000 * 24 * 7,
       },
@@ -48,7 +48,6 @@ export class ConverterChartComponent {
         },
         min: minValue,
         max: maxValue,
-        // tickAmount: 9,
       },
       tooltip: {
         borderColor: 'black',
@@ -109,6 +108,7 @@ export class ConverterChartComponent {
         ]
       },
     )
+    console.log(formattedData)
     return { minValue, maxValue, data: formattedData }
   }
 }
