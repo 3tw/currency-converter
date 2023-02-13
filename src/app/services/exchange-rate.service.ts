@@ -22,11 +22,9 @@ export class ExchangeRateService {
         console.log('Error fetching exchange rates: ', err)
         return caught
       }),
-      share(),
     )
   }
 
-  // DEV: get date dynamically
   getRate(baseCurrency: string | null, counterCurrency: string | null) {
     if (!baseCurrency || !counterCurrency) return
     const id = `${baseCurrency}-${counterCurrency}`

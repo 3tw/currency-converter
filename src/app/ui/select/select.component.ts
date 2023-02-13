@@ -40,7 +40,7 @@ export class SelectComponent implements ControlValueAccessor {
   displayedOptions: string[] = []
   ratesTrie: AutocompleteService
 
-  onChange: any = () => {}
+  onChange: any = () => {} // Will fire valueChanges event on form control
   onTouched: any = () => {}
 
   constructor(private autocompleteService: AutocompleteService) {
@@ -110,10 +110,8 @@ export class SelectComponent implements ControlValueAccessor {
       (suggestions.length === 1 && this.excludedOption === suggestions[0])
     ) {
       this.query = ''
-      selected = suggestions[0]
-    } else {
-      selected = suggestions[0]
     }
+    selected = suggestions[0]
 
     const suggestedOptionElement = this.optionElements.find(
       (el) => el && el.value === selected,
